@@ -13,20 +13,20 @@ export default class Uploader extends React.Component {
     }
 
     handleChange(inputElement) {
-        console.log("handleChange, inputElement", inputElement);
-        // this.setState({
-        //     [inputElement.name]: inputElement
-        // });
+        this.setState({
+            [inputElement.name]: inputElement.files[0]
+        });
+        console.log("handleChange, inputElement", inputElement.files[0]);
     }
 
     uploadTable() {
-        // var fd = new FormData();
-        // fd.append("file", this.state.data);
+        var fd = new FormData();
+        fd.append("file", this.state.file);
         console.log("uploadTable clicked");
         axios
-            .post("/upload.json")
-            .then(({ data }) => {
-                console.log("inside post axios, data", data);
+            .post("/upload.json", fd)
+            .then(() => {
+                console.log("inside post axios");
                 // this.setState({
                 //     data: data.data
                 // });
