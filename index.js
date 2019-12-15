@@ -62,12 +62,18 @@ if (process.env.NODE_ENV != "production") {
     app.use("/bundle.js", (req, res) => res.sendFile(`${__dirname}/bundle.js`));
 }
 
-app.post("/upload.json", uploader.single("file"), function(req, res) {
-    const { path } = req.file;
-    db.connectPool(path).then(results => {
-        console.log("results", results);
-    });
+app.get("/results.json", (res, req) => {
+    console.log("in results.json GET route");
+    res.json("hello");
 });
+// app.post("/upload.json", uploader.single("file"), function(req, res) {
+//     const { path } = req.file;
+//     db.connectPool(path)
+//         .then(results => {
+//             console.log("results", results);
+//         })
+//         .catch(err => console.log(err));
+// });
 
 // app.post("/upload.json", function(req, res) {
 //     CSVtoJSON()

@@ -10,3 +10,22 @@ CREATE TABLE users(
     bio VARCHAR,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+DROP TABLE IF EXISTS amazondata CASCADE;
+CREATE TABLE amazondata(
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    Campaign_Name VARCHAR(255) NOT NULL,
+    Ad_Group_Name VARCHAR(255) NOT NULL,
+    Targeting VARCHAR(255) NOT NULL,
+    Match_Type VARCHAR(255) NOT NULL,
+    Customer_Search_Term VARCHAR(255) NOT NULL,
+    Impressions VARCHAR(255) NOT NULL,
+    Clicks VARCHAR(255) NOT NULL,
+    Click_Thru_Rate_(CTR) VARCHAR(255) NOT NULL,
+    Cost_Per_Click_(CPC) VARCHAR(255) NOT NULL,
+    Spend VARCHAR(255) NOT NULL,
+    ACoS_cost VARCHAR(255) NOT NULL,
+    7_Day_Total_Orders_(#) VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

@@ -2,6 +2,7 @@ import React from "react";
 // import axios from "./axios";
 import { BrowserRouter, Route } from "react-router-dom";
 import Tool from "./tool";
+import { Results } from "./results";
 
 export default class App extends React.Component {
     constructor() {
@@ -33,7 +34,8 @@ export default class App extends React.Component {
                         <div>
                             <img className="logo" src="/img/logo.png" />
                         </div>
-                        <Route exact path="/" render={() => <Tool />} />
+                        <Route exact path="/" render={() => <Results />} />
+                        <Route exact path="/tool" render={() => <Tool />} />
                     </div>
                 </BrowserRouter>
             </div>
