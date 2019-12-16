@@ -76,14 +76,27 @@ module.exports.connectPool = function connectPool(path) {
 };
 
 module.exports.getKeywords = async function getKeywords() {
-    await db.query("SELECT REPLACE (ACoS_cost,'%', '') FROM amazondata");
+    await db.query(
+        "UPDATE amazondata SET ACoS_cost = replace(ACoS_cost, '%', '');"
+    );
+    await db.query(
+        "UPDATE amazondata SET ACoS_cost = replace(ACoS_cost, ',', '.');"
+    );
+    await db.query(
+        "ALTER TABLE amazondata ALTER COLUMN ACoS_cost TYPE DECIMAL USING ACoS_cost::numeric"
+    );
+
+    await db.query(
+        "UPDATE amazondata SET Click_Thru_Rate = replace(Click_Thru_Rate, '%', '');"
+    );
+    await db.query(
+        "UPDATE amazondata SET Click_Thru_Rate = replace(Click_Thru_Rate, ',', '.');"
+    );
+    await db.query(
+        "ALTER TABLE amazondata ALTER COLUMN Click_Thru_Rate TYPE DECIMAL USING click_thru_rate::numeric"
+    );
+
     return db.query(
-        "SELECT ACoS_cost FROM amazondata where seven_Day_Total_Orders >= 2 AND ACoS_cost < 40"
+        "SELECT Targeting,seven_Day_Total_Orders,ACoS_cost  from amazondata WHERE seven_Day_Total_Orders >= 2 AND ACoS_cost < 40;"
     );
 };
-
-// SELECT
-// INTO TEMP TABLE
-// FROM
-//     amazondata
-// WHERE
