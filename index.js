@@ -5,12 +5,11 @@ const db = require("./public/js/db");
 const multer = require("multer");
 const uidSafe = require("uid-safe");
 const path = require("path");
+var fs = require("fs");
 
 const compression = require("compression");
 const cookieSession = require("cookie-session");
 const csurf = require("csurf");
-// const CSVtoJSON = require("csvtojson");
-// const FileSystem = require("fs");
 
 const diskStorage = multer.diskStorage({
     destination: function(req, file, callback) {
@@ -62,33 +61,31 @@ if (process.env.NODE_ENV != "production") {
     app.use("/bundle.js", (req, res) => res.sendFile(`${__dirname}/bundle.js`));
 }
 
-app.get("/results.json", (res, req) => {
+app.post("/upload.json", uploader.single("file"), function(req, res) {
+    const { path } = req.file;
+    db.connectPool(path)
+        .then(() => {
+            //worked
+            fs.unlink(path, () => {}); //delete file if you can, fire and forget
+        })
+        .catch(err => {
+            console.log(err);
+            //did not work
+            res.sendStatus(500);
+        });
+});
+
+app.get("/results.json", (req, res) => {
     console.log("in results.json GET route");
-    db.getKeywords()
-        .then(data => {
-            console.log("data", data.rows);
+    db.getWinningKeywords()
+        .then(({ rows }) => {
+            console.log("rows data of getWinningKeywords", rows);
+            res.json([{ hello: "hello" }]);
         })
         .catch(err => {
             console.log(err);
         });
 });
-app.post("/upload.json", uploader.single("file"), function(req, res) {
-    const { path } = req.file;
-    db.connectPool(path);
-    // .then(results => {
-    //     console.log("results", results);
-    // })
-    // .catch(err => console.log(err));
-});
-
-// app.post("/upload.json", function(req, res) {
-//     CSVtoJSON()
-//         .fromFile("./cat.csv")
-//         .then(data => {
-//             console.log("data: ", data);
-//             res.json(data);
-//         });
-// });
 
 app.get("*", function(req, res) {
     res.sendFile(__dirname + "/index.html");
