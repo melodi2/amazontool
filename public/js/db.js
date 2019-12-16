@@ -1,8 +1,6 @@
 const spicedPg = require("spiced-pg");
 const db = spicedPg("postgres:postgres:postgres@localhost:5432/amazontool");
 
-let runOnce = true; //change to false
-
 var fs = require("fs");
 var { Pool } = require("pg");
 
@@ -33,7 +31,7 @@ module.exports.connectPool = function connectPool(path) {
             } else {
                 const stream = client.query(
                     copyFrom(
-                        `COPY amazondata FROM STDIN DELIMITER ';' CSV HEADER`
+                        `COPY amazondata (start,end_,Portfolio,currency, campaign_name,ad_group_name,targeting,match_type,customer_search_term, impressions,clicks,click_thru_rate,Cost_Per_Click,spend,totalsales,ACoS_cost,RoAS,seven_day_total_orders,seven_day_total_units,seven_day_conversionrate,seven_day_SKUunites,seven_day_other_SKUunites,seven_day_SKUSales,seven_day_other_SKUSales) FROM STDIN DELIMITER ';' CSV HEADER`
                     )
                 );
                 console.log("stream", stream);
@@ -56,52 +54,48 @@ module.exports.connectPool = function connectPool(path) {
     });
 };
 
-module.exports.getWinningKeywordsP1 = async function getWinningKeywordsP1() {
-    if (runOnce == false) {
-        console.log("update stuff run once");
-        runOnce = true;
+module.exports.setupData = async function setupData() {
+    await db.query(
+        "UPDATE amazondata SET ACoS_cost = replace(ACoS_cost, '%', '');"
+    );
+    await db.query(
+        "UPDATE amazondata SET ACoS_cost = replace(ACoS_cost, ',', '.');"
+    );
+    await db.query(
+        "ALTER TABLE amazondata ALTER COLUMN ACoS_cost TYPE DECIMAL USING ACoS_cost::numeric"
+    );
 
-        await db.query(
-            "UPDATE amazondata SET ACoS_cost = replace(ACoS_cost, '%', '');"
-        );
-        await db.query(
-            "UPDATE amazondata SET ACoS_cost = replace(ACoS_cost, ',', '.');"
-        );
-        await db.query(
-            "ALTER TABLE amazondata ALTER COLUMN ACoS_cost TYPE DECIMAL USING ACoS_cost::numeric"
-        );
-
-        await db.query(
-            "UPDATE amazondata SET Click_Thru_Rate = replace(Click_Thru_Rate, '%', '');"
-        );
-        await db.query(
-            "UPDATE amazondata SET Click_Thru_Rate = replace(Click_Thru_Rate, ',', '.');"
-        );
-        await db.query(
-            "ALTER TABLE amazondata ALTER COLUMN Click_Thru_Rate TYPE DECIMAL USING click_thru_rate::numeric"
-        );
-    }
-    console.log("selecting getWinningKeywords");
-
-    return db.query(
-        "SELECT targeting,seven_day_total_orders,ACoS_cost  from amazondata WHERE seven_day_total_orders >= 2 AND ACoS_cost < 40;"
+    await db.query(
+        "UPDATE amazondata SET Click_Thru_Rate = replace(Click_Thru_Rate, '%', '');"
+    );
+    await db.query(
+        "UPDATE amazondata SET Click_Thru_Rate = replace(Click_Thru_Rate, ',', '.');"
+    );
+    await db.query(
+        "ALTER TABLE amazondata ALTER COLUMN Click_Thru_Rate TYPE DECIMAL USING click_thru_rate::numeric"
     );
 };
 
-module.exports.getWinningKeywordsP2 = async function getWinningKeywordsP2() {
+module.exports.getWinningKeywordsP1 = function getWinningKeywordsP1() {
     return db.query(
-        "SELECT targeting,seven_day_total_orders,click_thru_rate  from amazondata WHERE seven_day_total_orders >= 1 AND click_thru_rate > 0.3;"
+        "SELECT id,targeting,seven_day_total_orders,ACoS_cost  from amazondata WHERE seven_day_total_orders >= 2 AND ACoS_cost < 40;"
     );
 };
 
-module.exports.getLoosingKeywordsP1 = async function getLoosingKeywordsP1() {
+module.exports.getWinningKeywordsP2 = function getWinningKeywordsP2() {
     return db.query(
-        "SELECT targeting,impressions,click_thru_rate  from amazondata WHERE impressions >= 1000 AND click_thru_rate < 0.2;"
+        "SELECT id,targeting,seven_day_total_orders,click_thru_rate  from amazondata WHERE seven_day_total_orders >= 1 AND click_thru_rate > 0.3;"
     );
 };
 
-module.exports.getLoosingKeywordsP2 = async function getLosingKeywordsP2() {
+module.exports.getLoosingKeywordsP1 = function getLoosingKeywordsP1() {
     return db.query(
-        "SELECT targeting,clicks,seven_day_total_orders from amazondata WHERE clicks BETWEEN 10 AND 20 AND seven_day_total_orders = 0;"
+        "SELECT id,targeting,impressions,click_thru_rate  from amazondata WHERE impressions >= 1000 AND click_thru_rate < 0.2;"
+    );
+};
+
+module.exports.getLoosingKeywordsP2 = function getLosingKeywordsP2() {
+    return db.query(
+        "SELECT id,targeting,clicks,seven_day_total_orders from amazondata WHERE clicks BETWEEN 10 AND 20 AND seven_day_total_orders = 0;"
     );
 };

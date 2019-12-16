@@ -6,6 +6,6 @@ export async function receiveResults() {
     console.log("data", data);
     return {
         type: "RECEIVE_RESULTS",
-        results: "hello"
+        results: data
     };
 }

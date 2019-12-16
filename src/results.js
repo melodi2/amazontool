@@ -15,6 +15,13 @@ export function Results() {
     return (
         <div>
             <p>Results - Keywords</p>
+            {keywords &&
+                keywords.length != 0 &&
+                keywords.map(el => (
+                    <div key={el.id}>
+                        <p>{el.targeting}</p>
+                    </div>
+                ))}
         </div>
     );
 }

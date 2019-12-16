@@ -66,6 +66,7 @@ app.post("/upload.json", uploader.single("file"), function(req, res) {
     db.connectPool(path)
         .then(() => {
             //worked
+            db.setupData();
             fs.unlink(path, () => {}); //delete file if you can, fire and forget
         })
         .catch(err => {
@@ -77,10 +78,10 @@ app.post("/upload.json", uploader.single("file"), function(req, res) {
 
 app.get("/results.json", (req, res) => {
     console.log("in results.json GET route");
-    db.getWinningKeywords()
+    db.getWinningKeywordsP1()
         .then(({ rows }) => {
             console.log("rows data of getWinningKeywords", rows);
-            res.json([{ hello: "hello" }]);
+            res.json(rows);
         })
         .catch(err => {
             console.log(err);

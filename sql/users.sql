@@ -13,6 +13,7 @@ CREATE TABLE users(
 
 DROP TABLE IF EXISTS amazondata CASCADE;
 CREATE TABLE amazondata(
+    id SERIAL PRIMARY KEY,
     start date,
     end_ date,
     Portfolio VARCHAR(255) NOT NULL,
