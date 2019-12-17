@@ -13,15 +13,17 @@ export function Results() {
     }, []);
 
     return (
-        <div>
-            <p>Results - Keywords</p>
-            {keywords &&
-                keywords.length != 0 &&
-                keywords.map(el => (
-                    <div key={el.id}>
-                        <p>{el.targeting}</p>
-                    </div>
-                ))}
+        <div className="results">
+            <div className="results-container">
+                <p>Results - Keywords</p>
+                {keywords &&
+                    keywords.length != 0 &&
+                    keywords.map(el => (
+                        <div key={el.id}>
+                            <p className="italic">{el.targeting}</p>
+                        </div>
+                    ))}
+            </div>
         </div>
     );
 }

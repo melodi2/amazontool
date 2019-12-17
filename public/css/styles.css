@@ -1,4 +1,39 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    background-color: orange;
+}
+
+.italic {
+    font-style: italic;
+}
+
+/* ////////////////IMAGES//////////////////////// */
+
+.bigLogo {
+    width: 200px;
+    height: 100px;
+    border-radius: 82% 18% 69% 31% / 23% 72% 28% 77%;
+    object-fit: fill;
+    margin: 10px auto;
+}
+
 .logo {
     width: 200px;
     height: 100px;
+    border-radius: 82% 18% 69% 31% / 23% 72% 28% 77%;
+    /* border: 2px black solid; */
+    object-fit: fill;
+}
+
+/* //////////////////////RESULTS//////////////////// */
+
+.results-container {
+    height: 500px;
+    overflow-y: scroll;
+    background-color: #fff5f59c;
+    margin-bottom: 10px;
 }

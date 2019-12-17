@@ -66,8 +66,10 @@ app.post("/upload.json", uploader.single("file"), function(req, res) {
     db.connectPool(path)
         .then(() => {
             //worked
-            db.setupData();
-            fs.unlink(path, () => {}); //delete file if you can, fire and forget
+
+            fs.unlink(path, () => {
+                db.setupData();
+            }); //delete file if you can, fire and forget
         })
         .catch(err => {
             console.log(err);
