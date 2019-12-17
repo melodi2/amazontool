@@ -9,7 +9,11 @@ export default function reducer(state = {}, action) {
     if (action.type == "SELECT_ALL") {
         state = {
             ...state,
-            isCheckedAll: !action.isChecked
+            isCheckedAll: action.isChecked,
+            isCheckedWP1: action.isChecked,
+            isCheckedWP2: action.isChecked,
+            isCheckedLP1: action.isChecked,
+            isCheckedLP2: action.isChecked
         };
     }
 

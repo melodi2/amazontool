@@ -20,9 +20,9 @@ export function Checkbox() {
     let isCheckedAll = useSelector(state => state && state.isCheckedAll);
 
     // useEffect(() => {
-    //     console.log(`useEffect running`);
-    //     dispatch(receiveResults());
-    // }, []);
+    // console.log(`useEffect running`);
+    // dispatch(receiveResults());
+    // });
 
     return (
         <div className="checkbox">
@@ -39,7 +39,7 @@ export function Checkbox() {
                                 )
                             }
                         />
-                        Select all (Recommended)
+                        Select all (recommended)
                     </label>
 
                     <label htmlFor="winningP1">
@@ -47,7 +47,7 @@ export function Checkbox() {
                             type="checkbox"
                             name="winningP1"
                             onChange={e => dispatch(winningP1(isCheckedWP1))}
-                            checked={isCheckedAll}
+                            checked={isCheckedWP1}
                         />
                         Winning P1
                     </label>
@@ -57,7 +57,7 @@ export function Checkbox() {
                             type="checkbox"
                             name="winningP2"
                             onChange={e => dispatch(winningP2(isCheckedWP2))}
-                            checked={isCheckedAll}
+                            checked={isCheckedWP2}
                         />
                         Winning P2
                     </label>
@@ -67,7 +67,7 @@ export function Checkbox() {
                             type="checkbox"
                             name="loosingP1"
                             onChange={e => dispatch(losingP1(isCheckedLP1))}
-                            checked={isCheckedAll}
+                            checked={isCheckedLP1}
                         />
                         Losing P1
                     </label>
@@ -77,7 +77,7 @@ export function Checkbox() {
                             type="checkbox"
                             name="loosingP2"
                             onChange={e => dispatch(losingP2(isCheckedLP2))}
-                            checked={isCheckedAll}
+                            checked={isCheckedLP2}
                         />
                         Losing P2
                     </label>
