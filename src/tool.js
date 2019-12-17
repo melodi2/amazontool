@@ -1,7 +1,7 @@
 import React from "react";
-import Uploader from "./uploader";
+import { Link } from "react-router-dom";
+
 import { Progressbar } from "./progress-bar";
-import { Checkbox } from "./checkbox";
 
 export default class Tool extends React.Component {
     constructor() {
@@ -12,11 +12,10 @@ export default class Tool extends React.Component {
 
     render() {
         return (
-            <div>
-                <h3>Upload your csv file to get started.</h3>
-                <Uploader />
+            <div className="center">
+                <h3>HOW IT WORKS</h3>
                 <Progressbar />
-                <Checkbox />
+                <Link to="/upload">Start Here</Link>
             </div>
         );
     }

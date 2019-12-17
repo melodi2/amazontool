@@ -20,11 +20,34 @@ body {
     flex-direction: column;
     align-items: center;
 }
+/* ///////////////////PROGRESSBAR//////////////////// */
+
+.progressbar-wrapper {
+    background: #fff;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
+.progressbar li {
+    list-style-type: none;
+    width: 20%;
+    float: left;
+    font-size: 12px;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    color: #7d7d7d;
+}
 
 .progressBox {
     width: 80%;
     height: 80%;
+    border: 2px black solid;
+    border-radius: 10px;
+    background-color: white;
 }
+///////////////////HEADER//////////////////// */
 
 .header {
     display: flex;

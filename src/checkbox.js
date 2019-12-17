@@ -39,7 +39,7 @@ export function Checkbox() {
                                 )
                             }
                         />
-                        Select all (recommended)
+                        Optimize everything (recommended)
                     </label>
 
                     <label htmlFor="winningP1">

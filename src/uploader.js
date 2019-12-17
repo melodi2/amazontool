@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "./axios";
+import { Link } from "react-router-dom";
 
 export default class Uploader extends React.Component {
     constructor() {
@@ -39,17 +40,20 @@ export default class Uploader extends React.Component {
 
     render() {
         return (
-            <div>
-                <h3>Uploader</h3>
-                <input
-                    type="file"
-                    name="file"
-                    id="file"
-                    className="inputfile"
-                    accept=".csv"
-                    onChange={e => this.handleChange(e.target)}
-                />
-                <button onClick={this.uploadTable}>UPLOAD</button>
+            <div className="center">
+                <div className="progressBox">
+                    <h3>Upload your csv file here.</h3>
+                    <input
+                        type="file"
+                        name="file"
+                        id="file"
+                        className="inputfile"
+                        accept=".csv"
+                        onChange={e => this.handleChange(e.target)}
+                    />
+                    <button onClick={this.uploadTable}>UPLOAD</button>
+                    <Link to="/check-criteria">Next</Link>
+                </div>
             </div>
         );
     }

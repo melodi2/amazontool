@@ -2,6 +2,8 @@ import React from "react";
 // import axios from "./axios";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import Tool from "./tool";
+import Uploader from "./uploader";
+import { Checkbox } from "./checkbox";
 import { Results } from "./results";
 
 export default class App extends React.Component {
@@ -45,6 +47,12 @@ export default class App extends React.Component {
                             exact
                             path="/results"
                             render={() => <Results />}
+                        />
+                        <Route exact path="/upload" component={Uploader} />
+                        <Route
+                            exact
+                            path="/check-criteria"
+                            component={Checkbox}
                         />
                     </div>
                 </BrowserRouter>
