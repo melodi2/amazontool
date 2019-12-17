@@ -37,3 +37,10 @@ body {
     background-color: #fff5f59c;
     margin-bottom: 10px;
 }
+
+/* //////////////////////RESULTS//////////////////// */
+
+form {
+    display: flex;
+    flex-direction: column;
+}

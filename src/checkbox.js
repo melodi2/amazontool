@@ -29,31 +29,59 @@ export function Checkbox() {
             <div className="checkbox-container">
                 <p>Checkbox</p>
                 <form>
-                    <input
-                        type="checkbox"
-                        name="selectAll"
-                        onChange={e => dispatch(selectAll(isCheckedAll))}
-                    />
-                    <input
-                        type="checkbox"
-                        name="winningP1"
-                        onChange={e => dispatch(winningP1(isCheckedWP1))}
-                    />
-                    <input
-                        type="checkbox"
-                        name="winningP2"
-                        onChange={e => dispatch(winningP2(isCheckedWP2))}
-                    />
-                    <input
-                        type="checkbox"
-                        name="loosingP1"
-                        onChange={e => dispatch(losingP1(isCheckedLP1))}
-                    />
-                    <input
-                        type="checkbox"
-                        name="loosingP2"
-                        onChange={e => dispatch(losingP2(isCheckedLP2))}
-                    />
+                    <label htmlFor="selectAll">
+                        <input
+                            type="checkbox"
+                            name="selectAll"
+                            onChange={e =>
+                                dispatch(
+                                    selectAll(isCheckedAll, e.target.checked)
+                                )
+                            }
+                        />
+                        Select all (Recommended)
+                    </label>
+
+                    <label htmlFor="winningP1">
+                        <input
+                            type="checkbox"
+                            name="winningP1"
+                            onChange={e => dispatch(winningP1(isCheckedWP1))}
+                            checked={isCheckedAll}
+                        />
+                        Winning P1
+                    </label>
+
+                    <label htmlFor="winningP2">
+                        <input
+                            type="checkbox"
+                            name="winningP2"
+                            onChange={e => dispatch(winningP2(isCheckedWP2))}
+                            checked={isCheckedAll}
+                        />
+                        Winning P2
+                    </label>
+
+                    <label htmlFor="losingP1">
+                        <input
+                            type="checkbox"
+                            name="loosingP1"
+                            onChange={e => dispatch(losingP1(isCheckedLP1))}
+                            checked={isCheckedAll}
+                        />
+                        Losing P1
+                    </label>
+
+                    <label htmlFor="losingP2">
+                        <input
+                            type="checkbox"
+                            name="loosingP2"
+                            onChange={e => dispatch(losingP2(isCheckedLP2))}
+                            checked={isCheckedAll}
+                        />
+                        Losing P2
+                    </label>
+
                     <button onClick={e => dispatch(receiveResults())}>
                         Submit
                     </button>

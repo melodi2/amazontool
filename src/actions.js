@@ -9,11 +9,12 @@ export async function receiveResults() {
     };
 }
 
-export async function selectAll(val) {
+export async function selectAll(val, etarget) {
     console.log("val", val);
+    console.log("etarget", etarget);
     return {
         type: "SELECT_ALL",
-        isChecked: true
+        isChecked: val
     };
 }
 
