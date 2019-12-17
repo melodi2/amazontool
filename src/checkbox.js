@@ -25,8 +25,8 @@ export function Checkbox() {
     // });
 
     return (
-        <div className="checkbox">
-            <div className="checkbox-container">
+        <div className="center">
+            <div className="checkbox-container progressBox">
                 <p>Checkbox</p>
                 <form>
                     <label htmlFor="selectAll">

@@ -1,6 +1,6 @@
 import React from "react";
 // import axios from "./axios";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 import Tool from "./tool";
 import { Results } from "./results";
 
@@ -28,14 +28,24 @@ export default class App extends React.Component {
         // }
         return (
             <div>
-                <h1>This is the App.js</h1>
                 <BrowserRouter>
                     <div>
-                        <div>
+                        <div className="header">
+                            <img className="logo" src="/img/logo.png" />
+
+                            <Link to="/">Start Here</Link>
+                            <Link to="/results">Results</Link>
+                            <a href="/logout">Log out</a>
+
                             <img className="logo" src="/img/logo.png" />
                         </div>
-                        <Route exact path="/" render={() => <Results />} />
-                        <Route exact path="/tool" render={() => <Tool />} />
+
+                        <Route exact path="/" render={() => <Tool />} />
+                        <Route
+                            exact
+                            path="/results"
+                            render={() => <Results />}
+                        />
                     </div>
                 </BrowserRouter>
             </div>
