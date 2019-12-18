@@ -62,13 +62,15 @@ if (process.env.NODE_ENV != "production") {
 }
 
 app.post("/upload.json", uploader.single("file"), async (req, res) => {
+    const { path } = req.file;
     try {
-        const { path } = req.file;
+        await db.setDatatype();
         await db.connectPool(path);
-        await db.setupData();
         fs.unlink(path, () => {});
+        await db.setNewDatatype();
+        console.log("after datatype setting");
     } catch (err) {
-        console.log(err);
+        console.log("catch err in post upload", err);
     }
 });
 
@@ -125,7 +127,7 @@ app.post("/results.json", async (req, res) => {
         }
         res.json({ success: true });
     } catch (err) {
-        console.log(err);
+        console.log("catch error in post results", err);
     }
 });
 

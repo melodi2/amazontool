@@ -31,7 +31,7 @@ module.exports.connectPool = function connectPool(path) {
             } else {
                 const stream = client.query(
                     copyFrom(
-                        `COPY amazondata (start,end_,Portfolio,currency, campaign_name,ad_group_name,targeting,match_type,customer_search_term, impressions,clicks,click_thru_rate,Cost_Per_Click,spend,totalsales,ACoS_cost,RoAS,seven_day_total_orders,seven_day_total_units,seven_day_conversionrate,seven_day_SKUunites,seven_day_other_SKUunites,seven_day_SKUSales,seven_day_other_SKUSales) FROM STDIN DELIMITER ';' CSV HEADER`
+                        `COPY amazondata (start,end_,portfolio,currency, campaign_name,ad_group_name,targeting,match_type,customer_search_term, impressions,clicks,click_thru_rate,Cost_Per_Click,spend,totalsales,ACoS_cost,RoAS,seven_day_total_orders,seven_day_total_units,seven_day_conversionrate,seven_day_SKUunites,seven_day_other_SKUunites,seven_day_SKUSales,seven_day_other_SKUSales) FROM STDIN DELIMITER ';' CSV HEADER`
                     )
                 );
                 console.log("stream", stream);
@@ -54,26 +54,55 @@ module.exports.connectPool = function connectPool(path) {
     });
 };
 
-module.exports.setupData = async function setupData() {
-    await db.query(
-        "UPDATE amazondata SET ACoS_cost = replace(ACoS_cost, '%', '');"
-    );
-    await db.query(
-        "UPDATE amazondata SET ACoS_cost = replace(ACoS_cost, ',', '.');"
-    );
-    await db.query(
-        "ALTER TABLE amazondata ALTER COLUMN ACoS_cost TYPE DECIMAL USING ACoS_cost::numeric"
-    );
+module.exports.setDatatype = async function setDatatype() {
+    try {
+        await db.query(
+            "ALTER TABLE amazondata ALTER COLUMN ACoS_cost TYPE VARCHAR USING ACoS_cost::VARCHAR"
+        );
+        await db.query(
+            "ALTER TABLE amazondata ALTER COLUMN click_thru_rate TYPE VARCHAR USING click_thru_rate::VARCHAR"
+        );
+        console.log("varchar datatype");
+    } catch (err) {
+        console.log("catch error in setDatatype", err);
+    }
+};
 
+module.exports.rowsCount = async function rowsCount() {
     await db.query(
-        "UPDATE amazondata SET click_thru_rate = replace(click_thru_rate, '%', '');"
+        "INSERT INTO id_table (data_id) SELECT COUNT(*) FROM amazondata;"
     );
-    await db.query(
-        "UPDATE amazondata SET click_thru_rate = replace(click_thru_rate, ',', '.');"
-    );
-    await db.query(
-        "ALTER TABLE amazondata ALTER COLUMN click_thru_rate TYPE DECIMAL USING click_thru_rate::numeric"
-    );
+};
+
+module.exports.setNewDatatype = async function setNewDatatype() {
+    try {
+        await db.query(
+            "UPDATE amazondata SET ACoS_cost = replace(replace(ACoS_cost, '%', ''), ',', '.');"
+        );
+        // await db.query(
+        //     "UPDATE amazondata SET ACoS_cost = replace(ACoS_cost, ',', '.');"
+        // );
+        console.log("numeric datatype query1");
+        await db.query(
+            "ALTER TABLE amazondata ALTER COLUMN ACoS_cost TYPE DECIMAL USING ACoS_cost::numeric"
+        );
+        console.log("numeric datatype query2");
+
+        await db.query(
+            "UPDATE amazondata SET click_thru_rate = replace(click_thru_rate, '%', '');"
+        );
+        console.log("numeric datatype query3");
+        await db.query(
+            "UPDATE amazondata SET click_thru_rate = replace(click_thru_rate, ',', '.');"
+        );
+        console.log("numeric datatype query4");
+        await db.query(
+            "ALTER TABLE amazondata ALTER COLUMN click_thru_rate TYPE DECIMAL USING click_thru_rate::numeric"
+        );
+        console.log("numeric datatype final");
+    } catch (err) {
+        console.log("catch error in setNewDatatype", err);
+    }
 };
 
 module.exports.getWinningKeywordsP1 = function getWinningKeywordsP1() {
@@ -99,10 +128,6 @@ module.exports.getLosingKeywordsP1 = function getLosingKeywordsP1() {
 //         "SELECT id,targeting,impressions,click_thru_rate  from amazondata WHERE impressions >= 1000 AND click_thru_rate < 0.2;"
 //     );
 // };
-
-module.exports.testq = function testq() {
-    return db.query("REPLACE(uploaded_at, 'T', ' ')");
-};
 
 module.exports.getLosingKeywordsP2 = function getLosingKeywordsP2() {
     return db.query(

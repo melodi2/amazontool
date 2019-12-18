@@ -16,7 +16,7 @@ CREATE TABLE amazondata(
     id SERIAL PRIMARY KEY,
     start date,
     end_ date,
-    Portfolio VARCHAR(255) NOT NULL,
+    portfolio VARCHAR(255) NOT NULL,
     currency VARCHAR(255) NOT NULL,
     campaign_name VARCHAR(255) NOT NULL,
     ad_group_name VARCHAR(255) NOT NULL,
@@ -41,6 +41,12 @@ CREATE TABLE amazondata(
     uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+DROP TABLE IF EXISTS id_table CASCADE;
+CREATE TABLE id_table(
+    id SERIAL PRIMARY KEY,
+    data_id INT
+);
+
 DROP TABLE IF EXISTS results CASCADE;
 CREATE TABLE results(
     id SERIAL PRIMARY KEY,
@@ -60,5 +66,6 @@ CREATE TABLE results(
     RoAS VARCHAR(255),
     seven_day_total_orders INT,
     uploaded_at VARCHAR,
+    table_id INTEGER NOT NULL REFERENCES id_table(id) ON DELETE CASCADE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
