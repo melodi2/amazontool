@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "./axios";
 import { Link } from "react-router-dom";
+import { Progressbar } from "./progress-bar";
 
 export default class Uploader extends React.Component {
     constructor() {
@@ -41,7 +42,8 @@ export default class Uploader extends React.Component {
     render() {
         return (
             <div className="center">
-                <div className="progressBox">
+                <div className="progressBox center">
+                    <Progressbar />
                     <h3>Upload your csv file here.</h3>
                     <input
                         type="file"

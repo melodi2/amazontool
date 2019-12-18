@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { receiveResults } from "./actions";
 
 export function Progressbar() {
     /* ... */
@@ -8,12 +7,10 @@ export function Progressbar() {
     // const progress = useSelector(state => state && state.progress);
 
     // useEffect(() => {
-    //     console.log(`useEffect running`);
-    //     dispatch(receiveResults());
     // }, []);
 
     return (
-        <div className="progressbar-wrapper">
+        <div>
             <ul className="progressbar">
                 <li className="active">Step 1</li>
                 <li>Step 2</li>

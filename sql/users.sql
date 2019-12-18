@@ -26,7 +26,7 @@ CREATE TABLE amazondata(
     impressions INT,
     clicks INT,
     click_thru_rate VARCHAR(255) NOT NULL,
-    Cost_Per_Click VARCHAR(255) NOT NULL,
+    cost_per_click VARCHAR(255) NOT NULL,
     spend VARCHAR(255) NOT NULL,
     totalsales VARCHAR(255) NOT NULL,
     ACoS_cost VARCHAR,
@@ -39,3 +39,23 @@ CREATE TABLE amazondata(
     seven_day_SKUSales VARCHAR(255) NOT NULL,
     seven_day_other_SKUSales VARCHAR(255) NOT NULL
 );
+
+CREATE TABLE results(
+    id SERIAL PRIMARY KEY,
+    start date,
+    end_ date,
+    campaign_name VARCHAR(255) NOT NULL,
+    ad_group_name VARCHAR(255) NOT NULL,
+    targeting VARCHAR(255) NOT NULL,
+    match_type VARCHAR(255) NOT NULL,
+    customer_search_term VARCHAR(255) NOT NULL,
+    impressions INT,
+    clicks INT,
+    click_thru_rate DECIMAL,
+    cost_per_click VARCHAR(255) NOT NULL,
+    spend VARCHAR(255) NOT NULL,
+    ACoS_cost DECIMAL,
+    RoAS VARCHAR(255) NOT NULL,
+    seven_day_total_orders INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)

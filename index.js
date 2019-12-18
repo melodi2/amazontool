@@ -78,16 +78,57 @@ app.post("/upload.json", uploader.single("file"), function(req, res) {
         });
 });
 
-app.get("/results.json", (req, res) => {
-    console.log("in results.json GET route");
-    db.getWinningKeywordsP1()
-        .then(({ rows }) => {
-            console.log("rows data of getWinningKeywords", rows);
-            res.json(rows);
-        })
-        .catch(err => {
-            console.log(err);
-        });
+app.post("/results.json", (req, res) => {
+    console.log("in results.json GET route, REQ", req.body);
+    res.json({ data: "hello" });
+    const { WP1, WP2, LP1, LP2 } = req.body;
+    if (WP1) {
+        console.log("WP1 true");
+        db.getWinningKeywordsP1()
+            .then(({ rows }) => {
+                console.log("rows data of getWinningKeywords", rows);
+                res.json(rows);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+    if (WP2) {
+        console.log("WP2 true");
+        db.getWinningKeywordsP2()
+            .then(({ rows }) => {
+                console.log("rows data of getWinningKeywords", rows);
+                res.json(rows);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+    if (LP1) {
+        console.log("LP1 true");
+        db.getLosingKeywordsP1()
+            .then(({ rows }) => {
+                console.log("rows data of getLosingKeywords", rows);
+                res.json(rows);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+    if (LP2) {
+        console.log("LP2 true");
+        db.getLosingKeywordsP2()
+            .then(({ rows }) => {
+                console.log("rows data of getWinningKeywords", rows);
+                res.json(rows);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
 });
 
 app.get("*", function(req, res) {

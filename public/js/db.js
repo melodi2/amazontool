@@ -66,13 +66,13 @@ module.exports.setupData = async function setupData() {
     );
 
     await db.query(
-        "UPDATE amazondata SET Click_Thru_Rate = replace(Click_Thru_Rate, '%', '');"
+        "UPDATE amazondata SET click_thru_rate = replace(click_thru_rate, '%', '');"
     );
     await db.query(
-        "UPDATE amazondata SET Click_Thru_Rate = replace(Click_Thru_Rate, ',', '.');"
+        "UPDATE amazondata SET click_thru_rate = replace(click_thru_rate, ',', '.');"
     );
     await db.query(
-        "ALTER TABLE amazondata ALTER COLUMN Click_Thru_Rate TYPE DECIMAL USING click_thru_rate::numeric"
+        "ALTER TABLE amazondata ALTER COLUMN click_thru_rate TYPE DECIMAL USING click_thru_rate::numeric"
     );
 };
 
@@ -88,13 +88,13 @@ module.exports.getWinningKeywordsP2 = function getWinningKeywordsP2() {
     );
 };
 
-module.exports.getLoosingKeywordsP1 = function getLoosingKeywordsP1() {
+module.exports.getLosingKeywordsP1 = function getLosingKeywordsP1() {
     return db.query(
         "SELECT id,targeting,impressions,click_thru_rate  from amazondata WHERE impressions >= 1000 AND click_thru_rate < 0.2;"
     );
 };
 
-module.exports.getLoosingKeywordsP2 = function getLosingKeywordsP2() {
+module.exports.getLosingKeywordsP2 = function getLosingKeywordsP2() {
     return db.query(
         "SELECT id,targeting,clicks,seven_day_total_orders from amazondata WHERE clicks BETWEEN 10 AND 20 AND seven_day_total_orders = 0;"
     );

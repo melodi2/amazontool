@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 import Tool from "./tool";
 import Uploader from "./uploader";
 import { Checkbox } from "./checkbox";
+import { Load } from "./load";
 import { Results } from "./results";
 
 export default class App extends React.Component {
@@ -54,6 +55,7 @@ export default class App extends React.Component {
                             path="/check-criteria"
                             component={Checkbox}
                         />
+                        <Route exact path="/load" component={Load} />
                     </div>
                 </BrowserRouter>
             </div>
