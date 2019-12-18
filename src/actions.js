@@ -7,7 +7,7 @@ export async function receiveResults(WP1, WP2, LP1, LP2) {
     console.log("data", data);
     return {
         type: "RECEIVE_RESULTS",
-        results: data
+        success: data.success
     };
 }
 

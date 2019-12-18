@@ -37,9 +37,11 @@ CREATE TABLE amazondata(
     seven_day_SKUunites VARCHAR(255) NOT NULL,
     seven_day_other_SKUunites VARCHAR(255) NOT NULL,
     seven_day_SKUSales VARCHAR(255) NOT NULL,
-    seven_day_other_SKUSales VARCHAR(255) NOT NULL
+    seven_day_other_SKUSales VARCHAR(255) NOT NULL,
+    uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+DROP TABLE IF EXISTS results CASCADE;
 CREATE TABLE results(
     id SERIAL PRIMARY KEY,
     start date,
@@ -57,5 +59,6 @@ CREATE TABLE results(
     ACoS_cost DECIMAL,
     RoAS VARCHAR(255) NOT NULL,
     seven_day_total_orders INT,
+    uploaded_at TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )

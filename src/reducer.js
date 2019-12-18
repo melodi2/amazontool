@@ -2,7 +2,7 @@ export default function reducer(state = {}, action) {
     if (action.type == "RECEIVE_RESULTS") {
         state = {
             ...state,
-            results: action.results
+            success: action.success
         };
     }
 

@@ -90,9 +90,15 @@ module.exports.getWinningKeywordsP2 = function getWinningKeywordsP2() {
 
 module.exports.getLosingKeywordsP1 = function getLosingKeywordsP1() {
     return db.query(
-        "SELECT id,targeting,impressions,click_thru_rate  from amazondata WHERE impressions >= 1000 AND click_thru_rate < 0.2;"
+        "INSERT INTO TABLE results (targeting, uploaded_at) SELECT (targeting, uploaded_at) from amazondata WHERE impressions >= 1000 AND click_thru_rate < 0.2;"
     );
 };
+
+// module.exports.getLosingKeywordsP1 = function getLosingKeywordsP1() {
+//     return db.query(
+//         "SELECT id,targeting,impressions,click_thru_rate  from amazondata WHERE impressions >= 1000 AND click_thru_rate < 0.2;"
+//     );
+// };
 
 module.exports.getLosingKeywordsP2 = function getLosingKeywordsP2() {
     return db.query(

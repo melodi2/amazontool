@@ -61,73 +61,71 @@ if (process.env.NODE_ENV != "production") {
     app.use("/bundle.js", (req, res) => res.sendFile(`${__dirname}/bundle.js`));
 }
 
-app.post("/upload.json", uploader.single("file"), function(req, res) {
-    const { path } = req.file;
-    db.connectPool(path)
-        .then(() => {
-            //worked
-
-            fs.unlink(path, () => {
-                db.setupData();
-            }); //delete file if you can, fire and forget
-        })
-        .catch(err => {
-            console.log(err);
-            //did not work
-            res.sendStatus(500);
-        });
+app.post("/upload.json", uploader.single("file"), async (req, res) => {
+    try {
+        const { path } = req.file;
+        await db.connectPool(path);
+        await db.setupData();
+        fs.unlink(path, () => {});
+    } catch (err) {
+        console.log(err);
+    }
 });
 
-app.post("/results.json", (req, res) => {
+app.post("/results.json", async (req, res) => {
     console.log("in results.json GET route, REQ", req.body);
-    res.json({ data: "hello" });
     const { WP1, WP2, LP1, LP2 } = req.body;
-    if (WP1) {
-        console.log("WP1 true");
-        db.getWinningKeywordsP1()
-            .then(({ rows }) => {
-                console.log("rows data of getWinningKeywords", rows);
-                res.json(rows);
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    }
+    try {
+        if (WP1) {
+            console.log("WP1 true");
+            await db
+                .getWinningKeywordsP1()
+                .then(({ rows }) => {
+                    console.log("rows data of getWinningKeywords", rows);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
 
-    if (WP2) {
-        console.log("WP2 true");
-        db.getWinningKeywordsP2()
-            .then(({ rows }) => {
-                console.log("rows data of getWinningKeywords", rows);
-                res.json(rows);
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    }
+        if (WP2) {
+            console.log("WP2 true");
+            await db
+                .getWinningKeywordsP2()
+                .then(({ rows }) => {
+                    console.log("rows data of getWinningKeywords", rows);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
 
-    if (LP1) {
-        console.log("LP1 true");
-        db.getLosingKeywordsP1()
-            .then(({ rows }) => {
-                console.log("rows data of getLosingKeywords", rows);
-                res.json(rows);
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    }
+        if (LP1) {
+            console.log("LP1 true");
+            await db
+                .getLosingKeywordsP1()
+                .then(({ rows }) => {
+                    console.log("rows data of getLosingKeywords", rows);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
 
-    if (LP2) {
-        console.log("LP2 true");
-        db.getLosingKeywordsP2()
-            .then(({ rows }) => {
-                console.log("rows data of getWinningKeywords", rows);
-                res.json(rows);
-            })
-            .catch(err => {
-                console.log(err);
-            });
+        if (LP2) {
+            console.log("LP2 true");
+            await db
+                .getLosingKeywordsP2()
+                .then(({ rows }) => {
+                    console.log("rows data of getLosingKeywords", rows);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
+        res.json({ success: true });
+    } catch (err) {
+        console.log(err);
     }
 });
 
