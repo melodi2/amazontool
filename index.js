@@ -101,7 +101,6 @@ app.post("/results.json", async (req, res) => {
         }
 
         if (LP1) {
-            console.log("LP1 true");
             await db
                 .getLosingKeywordsP1()
                 .then(({ rows }) => {
@@ -110,6 +109,7 @@ app.post("/results.json", async (req, res) => {
                 .catch(err => {
                     console.log(err);
                 });
+            console.log("LP1 true");
         }
 
         if (LP2) {

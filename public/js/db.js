@@ -78,19 +78,19 @@ module.exports.setupData = async function setupData() {
 
 module.exports.getWinningKeywordsP1 = function getWinningKeywordsP1() {
     return db.query(
-        "SELECT id,targeting,seven_day_total_orders,ACoS_cost  from amazondata WHERE seven_day_total_orders >= 2 AND ACoS_cost < 40;"
+        "SELECT id,targeting,seven_day_total_orders,ACoS_cost from amazondata WHERE seven_day_total_orders >= 2 AND ACoS_cost < 40;"
     );
 };
 
 module.exports.getWinningKeywordsP2 = function getWinningKeywordsP2() {
     return db.query(
-        "SELECT id,targeting,seven_day_total_orders,click_thru_rate  from amazondata WHERE seven_day_total_orders >= 1 AND click_thru_rate > 0.3;"
+        "SELECT id,targeting,seven_day_total_orders,click_thru_rate from amazondata WHERE seven_day_total_orders >= 1 AND click_thru_rate > 0.3;"
     );
 };
 
 module.exports.getLosingKeywordsP1 = function getLosingKeywordsP1() {
     return db.query(
-        "INSERT INTO TABLE results (targeting, uploaded_at) SELECT (targeting, uploaded_at) from amazondata WHERE impressions >= 1000 AND click_thru_rate < 0.2;"
+        "INSERT INTO results (targeting, uploaded_at) SELECT targeting, uploaded_at FROM amazondata WHERE impressions >= 1000 AND click_thru_rate < 0.2 returning *;"
     );
 };
 
@@ -99,6 +99,10 @@ module.exports.getLosingKeywordsP1 = function getLosingKeywordsP1() {
 //         "SELECT id,targeting,impressions,click_thru_rate  from amazondata WHERE impressions >= 1000 AND click_thru_rate < 0.2;"
 //     );
 // };
+
+module.exports.testq = function testq() {
+    return db.query("REPLACE(uploaded_at, 'T', ' ')");
+};
 
 module.exports.getLosingKeywordsP2 = function getLosingKeywordsP2() {
     return db.query(
