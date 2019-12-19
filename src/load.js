@@ -34,13 +34,14 @@ export function Load() {
                     </ul>
                 </div>
                 <div>
+                    {!newArray && "loading"}
                     {newArray && newArray.length > 0 && (
                         <div>
                             <h3>Winning Keywords Option 1</h3>
                             <h5>Targeting</h5>
                         </div>
                     )}
-                    {newArray && newArray.map(el => <p key="">{el}</p>)})
+                    {newArray && newArray.map(el => <p key="">{el}</p>)}
                 </div>
                 <div>
                     {results && results.WP1results.length > 0 && (

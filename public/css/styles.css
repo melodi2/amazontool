@@ -11,6 +11,16 @@ body {
     /* font-size: 15px; */
 }
 
+a {
+    text-decoration: none;
+    cursor: pointer;
+    color: black;
+    font-weight: 400;
+}
+a:hover {
+    color: green;
+}
+
 .italic {
     font-style: italic;
 }
@@ -25,7 +35,7 @@ body {
 .progressbar-wrapper {
     /* width: 100%; */
     width: -webkit-fill-available;
-    margin-left: 190px;
+    margin-left: 24%;
 }
 
 .progressbar li {
@@ -112,6 +122,18 @@ body {
     border-radius: 10px;
     background-color: white;
     padding: 20px 10px;
+    animation: fadeInAnimation ease 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 /*///////////////////HEADER//////////////////// */
 
@@ -231,7 +253,8 @@ button.green-btn:hover {
     border-color: #398439;
 }
 
-.btn {
+button {
+    margin: 10px 0;
 }
 
 .upload-btn-wrapper {
@@ -256,4 +279,97 @@ button.green-btn:hover {
     left: 0;
     top: 0;
     opacity: 0;
+}
+
+/* /////////////////info-box/////////////// */
+
+.info-box {
+    position: relative;
+    /* top: 18px;
+    right: 18px; */
+    top: -21px;
+    right: -260px;
+    text-align: center;
+    background-color: black;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    line-height: 26px;
+    cursor: default;
+}
+
+.info-box:before {
+    content: "?";
+    font-weight: bold;
+    color: #fff;
+}
+
+.info-box:hover p {
+    display: block;
+    transform-origin: 100% 0%;
+
+    -webkit-animation: fadeIn 0.3s ease-in-out;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.info-box p {
+    /* The tooltip */
+    display: none;
+    text-align: left;
+    background-color: #1e2021;
+    padding: 20px;
+    width: 300px;
+    position: absolute;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    right: -4px;
+    color: #fff;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.info-box p:before {
+    /* The pointer of the tooltip */
+    position: relative;
+    content: "";
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-bottom-color: #1e2021;
+    right: 10px;
+    top: -12px;
+}
+
+.info-box p:after {
+    /* Prevents the tooltip from being hidden */
+    width: 100%;
+    height: 40px;
+    content: "";
+    position: relative;
+    top: -40px;
+    left: 0;
+}
+
+/* CSS animation */
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+
+    100% {
+        opacity: 100%;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 100%;
+    }
 }

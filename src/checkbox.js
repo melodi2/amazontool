@@ -65,7 +65,10 @@ export function Checkbox() {
                                     }
                                     checked={isCheckedWP1}
                                 />
-                                Winning P1
+                                Winning P1{" "}
+                                <div className="info-box">
+                                    <p>Something.</p>
+                                </div>
                             </label>
                         </li>
 
@@ -80,6 +83,9 @@ export function Checkbox() {
                                     checked={isCheckedWP2}
                                 />
                                 Winning P2
+                                <div className="info-box">
+                                    <p>Something.</p>
+                                </div>
                             </label>
                         </li>
 
@@ -94,6 +100,9 @@ export function Checkbox() {
                                     checked={isCheckedLP1}
                                 />
                                 Losing P1
+                                <div className="info-box">
+                                    <p>Something.</p>
+                                </div>
                             </label>
                         </li>
 
@@ -108,11 +117,15 @@ export function Checkbox() {
                                     checked={isCheckedLP2}
                                 />
                                 Losing P2
+                                <div className="info-box">
+                                    <p>Something.</p>
+                                </div>
                             </label>
                         </li>
                     </ul>
 
                     <button
+                        className="green-btn"
                         onClick={e => {
                             dispatch(
                                 receiveResults(
