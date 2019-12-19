@@ -12,6 +12,14 @@ export async function receiveResults(WP1, WP2, LP1, LP2) {
     };
 }
 
+// export async function allResults() {
+//     const { data } = await axios.get("/results.json");
+//     return {
+//         type: "ALL_RESULTS",
+//         allresults: data
+//     };
+// }
+
 export async function selectAll(val, checked) {
     console.log("val", val);
     console.log("checked", checked);

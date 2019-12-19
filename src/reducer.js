@@ -7,6 +7,13 @@ export default function reducer(state = {}, action) {
         };
     }
 
+    if (action.type == "ALL_RESULTS") {
+        state = {
+            ...state,
+            allresults: action.allresults
+        };
+    }
+
     if (action.type == "SELECT_ALL") {
         state = {
             ...state,

@@ -190,3 +190,14 @@ form {
 form ul li {
     list-style-type: none;
 }
+
+/* ////////////////////grid///////////////// */
+
+.gridBox {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 2rem;
+    grid-template-rows: auto;
+    margin-bottom: 40px;
+    text-align: center;
+}

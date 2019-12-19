@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { receiveResults } from "./actions";
+import { allResults } from "./actions";
 
 export function Results() {
     /* ... */
@@ -9,7 +9,7 @@ export function Results() {
 
     useEffect(() => {
         console.log(`useEffect running`);
-        dispatch(receiveResults());
+        dispatch(allResults());
     }, []);
 
     return (
