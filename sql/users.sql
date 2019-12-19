@@ -44,7 +44,7 @@ CREATE TABLE amazondata(
 DROP TABLE IF EXISTS id_table CASCADE;
 CREATE TABLE id_table(
     id SERIAL PRIMARY KEY,
-    data_id INT
+    uploaded_at TIMESTAMP
 );
 
 DROP TABLE IF EXISTS results CASCADE;
@@ -65,7 +65,6 @@ CREATE TABLE results(
     ACoS_cost DECIMAL,
     RoAS VARCHAR(255),
     seven_day_total_orders INT,
-    uploaded_at VARCHAR,
-    table_id INTEGER NOT NULL REFERENCES id_table(id) ON DELETE CASCADE,
+    uploaded_at TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )

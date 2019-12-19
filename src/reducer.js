@@ -2,7 +2,8 @@ export default function reducer(state = {}, action) {
     if (action.type == "RECEIVE_RESULTS") {
         state = {
             ...state,
-            success: action.success
+            success: action.success,
+            results: action.results
         };
     }
 

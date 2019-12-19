@@ -1,14 +1,15 @@
 import axios from "./axios";
 
 export async function receiveResults(WP1, WP2, LP1, LP2) {
-    // const criteria = { WP1, WP2, LP1, LP2 };
-    // console.log("criteria", criteria);
-    // const { data } = await axios.post("/results.json", criteria);
-    // console.log("data", data);
-    // return {
-    //     type: "RECEIVE_RESULTS",
-    //     success: data.success
-    // };
+    const criteria = { WP1, WP2, LP1, LP2 };
+    console.log("criteria", criteria);
+    const { data } = await axios.post("/results.json", criteria);
+    console.log("data", data);
+    return {
+        type: "RECEIVE_RESULTS",
+        success: data.success,
+        results: data.results
+    };
 }
 
 export async function selectAll(val, checked) {

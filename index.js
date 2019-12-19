@@ -68,7 +68,7 @@ app.post("/upload.json", uploader.single("file"), async (req, res) => {
         await db.connectPool(path);
         fs.unlink(path, () => {});
         await db.setNewDatatype();
-        console.log("after datatype setting");
+        res.json({ success: true });
     } catch (err) {
         console.log("catch err in post upload", err);
     }
@@ -78,12 +78,14 @@ app.post("/results.json", async (req, res) => {
     console.log("in results.json GET route, REQ", req.body);
     const { WP1, WP2, LP1, LP2 } = req.body;
     try {
+        let results = {};
         if (WP1) {
             console.log("WP1 true");
             await db
                 .getWinningKeywordsP1()
                 .then(({ rows }) => {
                     console.log("rows data of getWinningKeywords", rows);
+                    results.WP1results = rows;
                 })
                 .catch(err => {
                     console.log(err);
@@ -96,6 +98,7 @@ app.post("/results.json", async (req, res) => {
                 .getWinningKeywordsP2()
                 .then(({ rows }) => {
                     console.log("rows data of getWinningKeywords", rows);
+                    results.WP2results = rows;
                 })
                 .catch(err => {
                     console.log(err);
@@ -103,15 +106,16 @@ app.post("/results.json", async (req, res) => {
         }
 
         if (LP1) {
+            console.log("LP1 true");
             await db
                 .getLosingKeywordsP1()
                 .then(({ rows }) => {
                     console.log("rows data of getLosingKeywords", rows);
+                    results.LP1results = rows;
                 })
                 .catch(err => {
                     console.log(err);
                 });
-            console.log("LP1 true");
         }
 
         if (LP2) {
@@ -120,12 +124,13 @@ app.post("/results.json", async (req, res) => {
                 .getLosingKeywordsP2()
                 .then(({ rows }) => {
                     console.log("rows data of getLosingKeywords", rows);
+                    results.LP2results = rows;
                 })
                 .catch(err => {
                     console.log(err);
                 });
         }
-        res.json({ success: true });
+        res.json({ success: true, results: results });
     } catch (err) {
         console.log("catch error in post results", err);
     }
