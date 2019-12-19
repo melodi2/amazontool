@@ -29,7 +29,13 @@ export function Checkbox() {
     return (
         <div className="center">
             <div className="progressBox center">
-                <Progressbar />
+                <div className="progressbar-wrapper">
+                    <ul className="progressbar">
+                        <li className="active">Upload File</li>
+                        <li className="active">Select Criteria</li>
+                        <li>Results</li>
+                    </ul>
+                </div>
                 <h3>
                     Select the criteria that you want to optimize the keywords
                     by

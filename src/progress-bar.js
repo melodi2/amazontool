@@ -10,7 +10,7 @@ export function Progressbar() {
     // }, []);
 
     return (
-        <div>
+        <div className="progressbar-wrapper">
             <ul className="progressbar">
                 <li className="active">Step 1</li>
                 <li>Step 2</li>

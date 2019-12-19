@@ -7,9 +7,16 @@ export function Load() {
     let results = useSelector(state => state && state.results);
     // console.log("results.LP1results", results.LP1results);
     if (results) {
+        var setResults = new Set();
         for (var i = 0; i < results.WP2results.length; i++) {
             console.log(results.WP2results[i].targeting);
+            setResults.add(results.WP2results[i].targeting);
         }
+        var newArray = [];
+        setResults.forEach(li => {
+            newArray.push(li);
+        });
+        console.log("newArray", newArray);
     }
 
     // useEffect(() => {
@@ -18,22 +25,42 @@ export function Load() {
 
     return (
         <div className="center">
-            <div className="progressBox center gridBox">
-                <div>
-                    {results && results.WP2results && <h3>Winning Keywords</h3>}
-                    {results && results.WP2results.map(el => el.targeting)}
+            <div className="progressBox center">
+                <div className="progressbar-wrapper">
+                    <ul className="progressbar">
+                        <li className="active">Upload File</li>
+                        <li className="active">Select Criteria</li>
+                        <li className="active">Results</li>
+                    </ul>
                 </div>
                 <div>
-                    <h3>Winning Keywords</h3>
+                    {newArray && newArray.length > 0 && (
+                        <div>
+                            <h3>Winning Keywords Option 1</h3>
+                            <h5>Targeting</h5>
+                        </div>
+                    )}
+                    {newArray && newArray.map(el => <p key="">{el}</p>)})
+                </div>
+                <div>
+                    {results && results.WP1results.length > 0 && (
+                        <h3>Winning Keywords Option 2</h3>
+                    )}
+                    {results && results.WP1results.map(el => el.targeting)}
                 </div>
 
                 <div>
-                    <h3>Losing Keywords</h3>
-                    {results && results.LP1results[0].targeting}
+                    {results && results.LP1results.length > 0 && (
+                        <h3>Losing Keywords Option 1</h3>
+                    )}
+                    {results && results.LP1results.map(el => el.targeting)}
                 </div>
 
                 <div>
-                    <h3>Losing Keywords</h3>
+                    {results && results.LP2results.length > 0 && (
+                        <h3>Losing Keywords Option 2</h3>
+                    )}
+                    {results && results.LP2results.map(el => el.targeting)}
                 </div>
             </div>
         </div>

@@ -34,13 +34,16 @@ export default class App extends React.Component {
                 <BrowserRouter>
                     <div>
                         <div className="header">
-                            <img className="logo" src="/img/logo.png" />
+                            <img className="logo" src="/img/newlogo.png" />
 
                             <Link to="/">Start Here</Link>
                             <Link to="/results">Results</Link>
                             <a href="/logout">Log out</a>
 
-                            <img className="logo" src="/img/logo.png" />
+                            <img
+                                className="profilePic"
+                                src="/img/profile.png"
+                            />
                         </div>
 
                         <Route exact path="/" render={() => <Tool />} />

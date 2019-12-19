@@ -25,6 +25,7 @@ body {
 .progressbar-wrapper {
     /* width: 100%; */
     width: -webkit-fill-available;
+    margin-left: 190px;
 }
 
 .progressbar li {
@@ -145,11 +146,19 @@ body {
 }
 
 .logo {
+    object-fit: scale-down;
     width: 200px;
-    height: 100px;
-    border-radius: 82% 18% 69% 31% / 23% 72% 28% 77%;
+    /* border-radius: 82% 18% 69% 31% / 23% 72% 28% 77%; */
     /* border: 2px black solid; */
-    object-fit: fill;
+    object-fit: cover;
+}
+
+.profilePic {
+    width: 80px;
+    object-fit: scale-down;
+    padding: 5px;
+    border-radius: 50%;
+    /* border: 2px black solid; */
 }
 
 /* //////////////////////RESULTS//////////////////// */
@@ -200,4 +209,51 @@ form ul li {
     grid-template-rows: auto;
     margin-bottom: 40px;
     text-align: center;
+}
+
+/* ////////////////////BUTTON///////////////// */
+
+button.green-btn {
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    font-weight: 400;
+}
+
+button.green-btn:hover {
+    color: #fff;
+    background-color: #449d44;
+    border-color: #398439;
+}
+
+.btn {
+}
+
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.btn {
+    border: 2px solid gray;
+    color: gray;
+    background-color: white;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.upload-btn-wrapper input[type="file"] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
 }

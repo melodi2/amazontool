@@ -43,17 +43,31 @@ export default class Uploader extends React.Component {
         return (
             <div className="center">
                 <div className="progressBox center">
-                    <Progressbar />
-                    <h3>Upload your csv file here.</h3>
-                    <input
-                        type="file"
-                        name="file"
-                        id="file"
-                        className="inputfile"
-                        accept=".csv"
-                        onChange={e => this.handleChange(e.target)}
-                    />
-                    <button onClick={this.uploadTable}>UPLOAD</button>
+                    <div className="progressbar-wrapper">
+                        <ul className="progressbar">
+                            <li className="active">Upload File</li>
+                            <li>Select Criteria</li>
+                            <li>Results</li>
+                        </ul>
+                    </div>
+                    <h3>
+                        Upload your Amazon Sponsored Advertising Report here.
+                    </h3>
+                    <div className="upload-btn-wrapper">
+                        <button className="btn">Upload a file</button>
+
+                        <input
+                            type="file"
+                            name="file"
+                            id="file"
+                            className="inputfile"
+                            accept=".csv"
+                            onChange={e => this.handleChange(e.target)}
+                        />
+                    </div>
+                    <button className="green-btn" onClick={this.uploadTable}>
+                        Continue
+                    </button>
                     <Link to="/check-criteria">Next</Link>
                 </div>
             </div>
