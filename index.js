@@ -62,8 +62,13 @@ if (process.env.NODE_ENV != "production") {
 }
 
 app.post("/upload.json", uploader.single("file"), async (req, res) => {
-    const { path } = req.file;
+    if (req.file) {
+        var { path } = req.file;
+    }
     try {
+        if (!req.file) {
+            return;
+        }
         await db.setDatatype();
         await db.connectPool(path);
         fs.unlink(path, () => {});

@@ -65,10 +65,14 @@ export default class Uploader extends React.Component {
                             onChange={e => this.handleChange(e.target)}
                         />
                     </div>
-                    <button className="green-btn" onClick={this.uploadTable}>
-                        Continue
-                    </button>
-                    <Link to="/check-criteria">Next</Link>
+                    <Link to="/check-criteria">
+                        <button
+                            className="green-btn"
+                            onClick={this.uploadTable}
+                        >
+                            Continue
+                        </button>
+                    </Link>
                 </div>
             </div>
         );

@@ -12,8 +12,11 @@ export default class Tool extends React.Component {
         return (
             <div>
                 <div className="center">
-                    <h3>HOW IT WORKS</h3>
-                    <Link to="/upload">Start Here</Link>
+                    <h2>How It Works</h2>
+                    <Link to="/upload">
+                        <button className="green-btn">Start Here</button>
+                    </Link>
+                    <img className="startImg" src="/img/start.png" />
                 </div>
             </div>
         );

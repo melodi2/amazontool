@@ -37,8 +37,8 @@ export function Checkbox() {
                     </ul>
                 </div>
                 <h3>
-                    Select the criteria that you want to optimize the keywords
-                    by
+                    Select the criteria for keyword optimization to determine
+                    your Winning and Losing Keywords.
                 </h3>
                 <form>
                     <label htmlFor="selectAll">
@@ -65,7 +65,7 @@ export function Checkbox() {
                                     }
                                     checked={isCheckedWP1}
                                 />
-                                Winning P1{" "}
+                                Winning Keywords based on ACoS{" "}
                                 <div className="info-box">
                                     <p>Something.</p>
                                 </div>
@@ -82,7 +82,7 @@ export function Checkbox() {
                                     }
                                     checked={isCheckedWP2}
                                 />
-                                Winning P2
+                                Winning Keywords based on CTR
                                 <div className="info-box">
                                     <p>Something.</p>
                                 </div>
@@ -99,7 +99,7 @@ export function Checkbox() {
                                     }
                                     checked={isCheckedLP1}
                                 />
-                                Losing P1
+                                Losing Keywords based on Impressions and CTR
                                 <div className="info-box">
                                     <p>Something.</p>
                                 </div>
@@ -116,14 +116,15 @@ export function Checkbox() {
                                     }
                                     checked={isCheckedLP2}
                                 />
-                                Losing P2
+                                Losing Keywords based on Clicks and Sales
                                 <div className="info-box">
                                     <p>Something.</p>
                                 </div>
                             </label>
                         </li>
                     </ul>
-
+                </form>
+                <Link to="/results">
                     <button
                         className="green-btn"
                         onClick={e => {
@@ -138,9 +139,9 @@ export function Checkbox() {
                             console.log("dispatch reveice results");
                         }}
                     >
-                        <Link to="/load">Submit</Link>
+                        Submit
                     </button>
-                </form>
+                </Link>
             </div>
         </div>
     );

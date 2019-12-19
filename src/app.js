@@ -36,7 +36,7 @@ export default class App extends React.Component {
                         <div className="header">
                             <img className="logo" src="/img/newlogo.png" />
 
-                            <Link to="/">Start Here</Link>
+                            <Link to="/">Guide</Link>
                             <Link to="/results">Results</Link>
                             <a href="/logout">Log out</a>
 
@@ -49,7 +49,7 @@ export default class App extends React.Component {
                         <Route exact path="/" render={() => <Tool />} />
                         <Route
                             exact
-                            path="/results"
+                            path="/allresults"
                             render={() => <Results />}
                         />
                         <Route exact path="/upload" component={Uploader} />
@@ -58,7 +58,7 @@ export default class App extends React.Component {
                             path="/check-criteria"
                             component={Checkbox}
                         />
-                        <Route exact path="/load" component={Load} />
+                        <Route exact path="/results" component={Load} />
                     </div>
                 </BrowserRouter>
             </div>

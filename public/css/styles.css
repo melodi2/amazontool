@@ -118,7 +118,9 @@ a:hover {
 .progressBox {
     width: 80%;
     height: 80%;
-    border: 2px black solid;
+    /* border: 2px black solid; */
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.8),
+        0 0 40px rgba(0, 0, 0, 0.1) inset;
     border-radius: 10px;
     background-color: white;
     padding: 20px 10px;
@@ -142,7 +144,7 @@ a:hover {
     justify-content: space-between;
     align-items: center;
     background-color: white;
-    margin-bottom: 100px;
+    margin-bottom: 20px;
 }
 
 .header a {
@@ -181,6 +183,12 @@ a:hover {
     padding: 5px;
     border-radius: 50%;
     /* border: 2px black solid; */
+}
+
+.startImg {
+    width: 100%;
+    object-fit: scale-down;
+    padding: 5px;
 }
 
 /* //////////////////////RESULTS//////////////////// */
@@ -288,7 +296,7 @@ button {
     /* top: 18px;
     right: 18px; */
     top: -21px;
-    right: -260px;
+    right: -400px;
     text-align: center;
     background-color: black;
     border-radius: 50%;
