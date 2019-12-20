@@ -67,7 +67,11 @@ export function Checkbox() {
                                 />
                                 Winning Keywords based on ACoS{" "}
                                 <div className="info-box">
-                                    <p>Something.</p>
+                                    <p>
+                                        Find Winning Keywords by at looking your
+                                        Total Advertising Cost of Sales (ACoS)
+                                        and number of Sales.
+                                    </p>
                                 </div>
                             </label>
                         </li>
@@ -84,7 +88,11 @@ export function Checkbox() {
                                 />
                                 Winning Keywords based on CTR
                                 <div className="info-box">
-                                    <p>Something.</p>
+                                    <p>
+                                        Find Winning Keywords by looking at your
+                                        Click-thru Rate (CTR) and number of
+                                        Sales.
+                                    </p>
                                 </div>
                             </label>
                         </li>
@@ -101,7 +109,10 @@ export function Checkbox() {
                                 />
                                 Losing Keywords based on Impressions and CTR
                                 <div className="info-box">
-                                    <p>Something.</p>
+                                    <p>
+                                        Find Losing Keywords based on number of
+                                        Impressions and Click-thru Rate (CTR).
+                                    </p>
                                 </div>
                             </label>
                         </li>
@@ -118,7 +129,10 @@ export function Checkbox() {
                                 />
                                 Losing Keywords based on Clicks and Sales
                                 <div className="info-box">
-                                    <p>Something.</p>
+                                    <p>
+                                        Find Losing Keywords based on number of
+                                        Clicks and Sales.
+                                    </p>
                                 </div>
                             </label>
                         </li>

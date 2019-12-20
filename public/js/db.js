@@ -70,7 +70,7 @@ module.exports.setDatatype = async function setDatatype() {
 
 module.exports.rowsCount = function rowsCount() {
     db.query(
-        "INSERT INTO id_table (uploaded_at) SELECT uploaded_at FROM amazondata LIMIT 1;"
+        "INSERT INTO id_table (uploaded_at) SELECT uploaded_at FROM amazondata ORDER BY DESC LIMIT 1;"
     );
 };
 

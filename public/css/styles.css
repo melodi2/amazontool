@@ -259,6 +259,7 @@ button.green-btn:hover {
     color: #fff;
     background-color: #449d44;
     border-color: #398439;
+    cursor: pointer;
 }
 
 button {
@@ -279,6 +280,12 @@ button {
     border-radius: 8px;
     font-size: 20px;
     font-weight: bold;
+}
+
+.btn:hover {
+    cursor: pointer;
+    background-color: lightgrey;
+    color: #565555;
 }
 
 .upload-btn-wrapper input[type="file"] {
@@ -335,6 +342,7 @@ button {
     color: #fff;
     font-size: 13px;
     line-height: 1.4;
+    z-index: 1;
 }
 
 .info-box p:before {
