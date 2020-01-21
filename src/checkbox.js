@@ -14,17 +14,11 @@ import { Progressbar } from "./progress-bar";
 export function Checkbox() {
     /* ... */
     const dispatch = useDispatch();
-    // const progress = useSelector(state => state && state.progress);
     let isCheckedWP1 = useSelector(state => state && state.isCheckedWP1);
     let isCheckedWP2 = useSelector(state => state && state.isCheckedWP2);
     let isCheckedLP1 = useSelector(state => state && state.isCheckedLP1);
     let isCheckedLP2 = useSelector(state => state && state.isCheckedLP2);
     let isCheckedAll = useSelector(state => state && state.isCheckedAll);
-
-    // useEffect(() => {
-    // console.log(`useEffect running`);
-    // dispatch(receiveResults());
-    // });
 
     return (
         <div className="center">
@@ -52,6 +46,12 @@ export function Checkbox() {
                             }
                         />
                         Optimize everything (recommended)
+                        <div className="info-box">
+                            <p>
+                                Select all criteria and find all the Winning and
+                                Losing Keywords.
+                            </p>
+                        </div>
                     </label>
 
                     <ul>
@@ -150,7 +150,6 @@ export function Checkbox() {
                                     isCheckedLP2
                                 )
                             );
-                            console.log("dispatch reveice results");
                         }}
                     >
                         Submit

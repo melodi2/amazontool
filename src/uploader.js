@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "./axios";
 import { Link } from "react-router-dom";
-import { Progressbar } from "./progress-bar";
 
 export default class Uploader extends React.Component {
     constructor() {
@@ -38,6 +37,7 @@ export default class Uploader extends React.Component {
                 console.log(err);
             });
     }
+    //onClick={this.uploadTable}
 
     render() {
         return (

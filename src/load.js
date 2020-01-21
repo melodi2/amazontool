@@ -1,11 +1,8 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { receiveResults } from "./actions";
+import { useSelector } from "react-redux";
 
 export function Load() {
-    // const dispatch = useDispatch();
     let results = useSelector(state => state && state.results);
-    // console.log("results.LP1results", results.LP1results);
     if (results) {
         ////WINNING OPTION 1/////
         var setWP1Results = new Set();
@@ -17,46 +14,35 @@ export function Load() {
         setWP1Results.forEach(li => {
             newWP1Results.push(li);
         });
-        console.log("newWP1Results", newWP1Results);
         ////WINNING OPTION 2/////
         var setWP2Results = new Set();
         for (let i = 0; i < results.WP2results.length; i++) {
-            console.log(results.WP2results[i].targeting);
             setWP2Results.add(results.WP2results[i].targeting);
         }
         var newWP2Results = [];
         setWP2Results.forEach(li => {
             newWP2Results.push(li);
         });
-        console.log("newWP2Results", newWP2Results);
 
         ////LOSING OPTION 1/////
         var setLP1Results = new Set();
         for (let i = 0; i < results.LP1results.length; i++) {
-            console.log(results.LP1results[i].targeting);
             setLP1Results.add(results.LP1results[i].targeting);
         }
         var newLP1Results = [];
         setLP1Results.forEach(li => {
             newLP1Results.push(li);
         });
-        console.log("newLP1Results", newLP1Results);
         ////LOSING OPTION 2/////
         var setLP2Results = new Set();
         for (let i = 0; i < results.LP2results.length; i++) {
-            console.log(results.LP2results[i].targeting);
             setLP2Results.add(results.LP2results[i].targeting);
         }
         var newLP2Results = [];
         setLP2Results.forEach(li => {
             newLP2Results.push(li);
         });
-        console.log("newLP2Results", newLP2Results);
     }
-
-    // useEffect(() => {
-    //     console.log(`useEffect running`, results.LP1results);
-    // }, []);
 
     return (
         <div className="center">

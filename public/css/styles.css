@@ -8,7 +8,6 @@ body {
     margin: 0;
     min-height: 100vh;
     min-width: 755px;
-    /* font-size: 15px; */
 }
 
 a {
@@ -172,8 +171,6 @@ a:hover {
 .logo {
     object-fit: scale-down;
     width: 200px;
-    /* border-radius: 82% 18% 69% 31% / 23% 72% 28% 77%; */
-    /* border: 2px black solid; */
     object-fit: cover;
 }
 
@@ -182,13 +179,18 @@ a:hover {
     object-fit: scale-down;
     padding: 5px;
     border-radius: 50%;
-    /* border: 2px black solid; */
 }
 
 .startImg {
     width: 100%;
     object-fit: scale-down;
     padding: 5px;
+}
+
+.criteriaImg {
+    width: 250px;
+    object-fit: scale-down;
+    padding-right: 10px;
 }
 
 /* //////////////////////RESULTS//////////////////// */
@@ -282,7 +284,7 @@ button {
     font-weight: bold;
 }
 
-.btn:hover {
+input#file {
     cursor: pointer;
     background-color: lightgrey;
     color: #565555;
@@ -300,8 +302,6 @@ button {
 
 .info-box {
     position: relative;
-    /* top: 18px;
-    right: 18px; */
     top: -21px;
     right: -400px;
     text-align: center;

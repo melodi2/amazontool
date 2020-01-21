@@ -19,7 +19,3 @@ let elem = (
     </Provider>
 );
 ReactDOM.render(elem, document.querySelector("main"));
-
-// function HelloWorld() {
-//     return <div>Hello, World!</div>;
-// }

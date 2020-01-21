@@ -80,16 +80,13 @@ app.post("/upload.json", uploader.single("file"), async (req, res) => {
 });
 
 app.post("/results.json", async (req, res) => {
-    console.log("in results.json GET route, REQ", req.body);
     const { WP1, WP2, LP1, LP2 } = req.body;
     try {
         let results = {};
         if (WP1) {
-            console.log("WP1 true");
             await db
                 .getWinningKeywordsP1()
                 .then(({ rows }) => {
-                    console.log("rows data of getWinningKeywords", rows);
                     results.WP1results = rows;
                 })
                 .catch(err => {
@@ -98,11 +95,9 @@ app.post("/results.json", async (req, res) => {
         }
 
         if (WP2) {
-            console.log("WP2 true");
             await db
                 .getWinningKeywordsP2()
                 .then(({ rows }) => {
-                    console.log("rows data of getWinningKeywords", rows);
                     results.WP2results = rows;
                 })
                 .catch(err => {
@@ -111,11 +106,9 @@ app.post("/results.json", async (req, res) => {
         }
 
         if (LP1) {
-            console.log("LP1 true");
             await db
                 .getLosingKeywordsP1()
                 .then(({ rows }) => {
-                    console.log("rows data of getLosingKeywords", rows);
                     results.LP1results = rows;
                 })
                 .catch(err => {
@@ -124,11 +117,9 @@ app.post("/results.json", async (req, res) => {
         }
 
         if (LP2) {
-            console.log("LP2 true");
             await db
                 .getLosingKeywordsP2()
                 .then(({ rows }) => {
-                    console.log("rows data of getLosingKeywords", rows);
                     results.LP2results = rows;
                 })
                 .catch(err => {

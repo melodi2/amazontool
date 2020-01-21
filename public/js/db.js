@@ -15,9 +15,6 @@ const pool = new Pool({
 
 var copyFrom = require("pg-copy-streams").from;
 
-// module.exports.getInfo = function getInfo(id) {
-//     return db.query("SELECT * from users WHERE id=$1", [id]);
-// };
 pool.on("error", function(err) {
     console.log("pool.on error", err);
 });
@@ -27,34 +24,31 @@ module.exports.connectPool = function connectPool(path) {
     return new Promise((resolve, reject) => {
         pool.connect(function(err, client, done) {
             if (err) {
-                console.log("in if err of pool.connect", err);
+                console.log("error of pool.connect", err);
             } else {
                 const stream = client.query(
                     copyFrom(
                         `COPY amazondata (start,end_,portfolio,currency, campaign_name,ad_group_name,targeting,match_type,customer_search_term, impressions,clicks,click_thru_rate,Cost_Per_Click,spend,totalsales,ACoS_cost,RoAS,seven_day_total_orders,seven_day_total_units,seven_day_conversionrate,seven_day_SKUunites,seven_day_other_SKUunites,seven_day_SKUSales,seven_day_other_SKUSales) FROM STDIN DELIMITER ';' CSV HEADER`
                     )
                 );
-                console.log("stream", stream.text);
                 stream.on("error", function(err) {
-                    console.log("in stream", err);
+                    console.log("error in stream", err);
                 });
                 stream.on("end", done);
 
                 var fileStream = fs.createReadStream(path);
                 fileStream.on("error", function(err) {
-                    console.log("in fileStream", err);
+                    console.log("error in fileStream", err);
                 });
                 fileStream.pipe(stream);
                 resolve();
-                //resolve
-
-                //in index .then...
             }
         });
     });
 };
 
 module.exports.setDatatype = async function setDatatype() {
+    //change column datatype to VARCHAR
     try {
         await pool.query(
             "ALTER TABLE amazondata ALTER COLUMN ACoS_cost TYPE VARCHAR USING ACoS_cost::VARCHAR"
@@ -62,7 +56,6 @@ module.exports.setDatatype = async function setDatatype() {
         await pool.query(
             "ALTER TABLE amazondata ALTER COLUMN click_thru_rate TYPE VARCHAR USING click_thru_rate::VARCHAR"
         );
-        console.log("varchar datatype");
     } catch (err) {
         console.log("catch error in setDatatype", err);
     }
@@ -75,32 +68,23 @@ module.exports.rowsCount = function rowsCount() {
 };
 
 module.exports.setNewDatatype = async function setNewDatatype() {
+    //alter column by deleting % character and replacing comma by dot
     try {
         await pool.query(
             "UPDATE amazondata SET ACoS_cost = replace(replace(ACoS_cost, '%', ''), ',', '.');"
         );
-        // await db.query(
-        //     "UPDATE amazondata SET ACoS_cost = replace(ACoS_cost, ',', '.');"
-        // );
-        console.log("numeric datatype query1");
+        //change column datatype to NUMERIC
         await pool.query(
             "ALTER TABLE amazondata ALTER COLUMN ACoS_cost TYPE DECIMAL USING ACoS_cost::numeric"
         );
-        console.log("numeric datatype query2");
 
         await pool.query(
             "UPDATE amazondata SET click_thru_rate = replace(replace(click_thru_rate, '%', ''), ',', '.');"
         );
-        // "UPDATE amazondata SET click_thru_rate = replace(click_thru_rate, '%', '');"
-        console.log("numeric datatype query3");
-        // await db.query(
-        //     "UPDATE amazondata SET click_thru_rate = replace(click_thru_rate, ',', '.');"
-        // );
-        console.log("numeric datatype query4");
+
         await pool.query(
             "ALTER TABLE amazondata ALTER COLUMN click_thru_rate TYPE DECIMAL USING click_thru_rate::numeric"
         );
-        console.log("numeric datatype final");
     } catch (err) {
         console.log("catch error in setNewDatatype", err);
     }
